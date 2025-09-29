@@ -1,0 +1,18 @@
+# Compiled executables
+*.exe
+*.out
+hello
+variables
+arithmetic
+arrays
+structs
+calculator
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE files
+.vscode/
+*.o
+*.obj
