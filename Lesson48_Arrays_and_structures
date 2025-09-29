@@ -1,0 +1,535 @@
+#include <iostream>
+#include <string>
+using namespace std;
+//Notes:
+/*
+--> A Function is a block of code which only runs when it is called.
+--> They help in organizing code, improving readability, and reducing redundancy.
+--> Functions can take inputs (parameters) and can return outputs (return values).
+-------------------------------------------------------------------------------------------------------------
+--> Functions can take inputs (parameters) and can return outputs (return values).
+--> if it procedure or normal function you can use parameters.
+-------------------------------------------------------------------------------------------------------------
+--> (Variable Scope/ Local vs Global Variables):
+    Variable Scope: refers to the visibility and lifetime of variables in a program.
+    Local Variables: are declared inside a function and can only be accessed within that function.
+    Global Variables: are declared outside of all functions and can be accessed from any function.
+-------------------------------------------------------------------------------------------------------------
+--> ( Function Parameters: By-Value vs By-Reference & ):
+--> By-Value:
+
+    - In by-value, what really happens is?
+    - In the main function, we gave the variable num the value 20.
+    - But when we called the function, it took a copy of num and worked with that copy inside the function.
+    - So any changes happen only to the copy, not to the original num in main.
+--> Ex:
+
+    void myFunc(int num)
+    {
+        num = 10;
+        cout << "Number inside function became=  " << num << endl;
+    }
+
+    int main() {
+        int num;
+        num = 20;
+        myFunc(num); //10
+        cout << "Number After Calling the function became=  " << num << endl; //20
+        myFunc(num); //10
+        return 0;
+    }
+
+
+--> By-Reference:
+    - In by-reference, what happens is?
+    - The function gets a reference (or link) to the original variable, not a copy.
+    - This means any changes inside the function will directly change the original variable in main.
+
+
+--> Ex:
+    void myFunc(int &num)
+    {
+        num = 10;
+        cout << "Number inside function became=  " << num << endl;
+
+    }
+    int main(){
+        int num = 20;
+        cout << "Number Befor Calling the function became=  " << num << endl; //20
+        myFunc(num); //10
+        cout << "Number After Calling the function became=  " << num << endl; //10
+        myFunc(num); //10
+        return 0;
+    }
+--> Ek Ex:
+
+    void swapByValue(int num1, int num2)
+    {
+        int temp;
+        temp = num1;
+        num1 = num2;
+        num2 = temp;
+        cout << "After Swap By-Value: --> Num1 IS =  " << num1 << "   , and Num2 Is =  " << num2 << "  \n";
+        cout << "Address Value For Num1 Is : " << &num1 << "  , and Address Value For Num2 Is : " << &num2 << endl;
+        cout << "-----------------------\n";
+    }
+
+    void swapByReferance(int& num1, int& num2)
+    {
+        int temp;
+        temp = num1;
+        num1 = num2;
+        num2 = temp;
+        cout << "After Swap By-Referance: --> Num1 IS =  " << num1 << "  ,  and Num2 Is =  " << num2 << "  \n";
+        cout << "Address Value For Num1 Is : " << &num1 << "  ,  and Address Value For Num2 Is : " << &num2 << endl;
+        cout << "-----------------------\n";
+    }
+
+    int main()
+    {
+        int num1, num2;
+        cout << "Enter num 1 ? " << endl;
+        cin >> num1;
+        cout << "Enter num 2 ? " << endl;
+        cin >> num2;
+        cout << "\nBefore Any Swap --> Num1 =   " << num1 << "  , Num2 =  " << num2 << endl;
+        cout << "Address Value For Num1 Is :  " << &num1 << "   , and Address Value For Num2 Is : " << &num2 << endl;
+        cout << "\n------------------\n";
+        swapByValue(num1, num2);
+        cout << "\nAfter Swap By-Value 'But inside Main function' --> Num1 =   " << num1 << "  ,  Num2 =  " << num2 << "\n";
+        cout << "\n------------------\n";
+        swapByReferance(num1, num2);
+        cout << "\nAfter Swap By-Referance 'But inside Main function' --> Num1 =   " << num1 << "  ,  Num2 =  " << num2 << "\n";
+        cout << "\n------------------\n";
+        return 0;
+    }
+-------------------------------------------------------------------------------------------------------------
+--> (Structures and Functions - Re-usability) :
+
+    - We can pass a struct to functions to organize and reuse code.
+    - If we pass by reference (&), the function can change the original data in main.
+    - If we pass by value, the function works on a copy, and changes won't affect the original.
+    - in Ex2, &'i kullandik ve Re-usability'i kullandik!
+
+--> Ex1: (Normal bir ornek, yani & bunu kullandik ama hala Re-usability concept'i kullanmadik.)
+
+        #include <iostream>
+        #include <string>
+        using namespace std;
+        struct strInfo
+        {
+            string firstName;
+            string lastName;
+            int age;
+            string phone;
+        };
+
+        void readInfo(strInfo &info) //Not!!! --> "&" means we work on the same variable from main,
+        so changes here stay after the function ends.
+        {
+            cout << "Please Enter A First Name.." << endl;
+            cin >> info.firstName;
+            cout << "Please Enter A Last Name.." << endl;
+            cin >> info.lastName;
+            cout << "Please Enter Age.." << endl;
+            cin >> info.age;
+            cout << "Please Enter A Phone Number.." << endl;
+            cin >> info.phone;
+        }
+
+        void printInfo(strInfo info)
+        {
+            cout << "--------------------------------" << endl;
+            cout << "The First Name Is: " << info.firstName << endl;
+            cout << "The Last Name Is: " << info.lastName << endl;
+            cout << "The Age Is: " << info.age << endl;
+            cout << "The Phone Number Is: " << info.phone << endl;
+            cout << "--------------------------------" << endl;
+        }
+        int main()
+        {
+            strInfo info;
+            readInfo(info);
+            printInfo(info);
+            return 0;
+        }
+--> Ex2: (Using Re-Usability concept)
+
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    struct strInfo
+    {
+        string firstName;
+        string lastName;
+        int age;
+        string phone;
+    };
+
+    void readInfo(strInfo &info) //Not!!! --> "&" means we work on the same variable from main, so changes here stay after the function ends.
+    {
+        cout << "Please Enter A First Name?" << endl;
+        cin >> info.firstName;
+        cout << "Please Enter A Last Name?" << endl;
+        cin >> info.lastName;
+        cout << "Please Enter Age?" << endl;
+        cin >> info.age;
+        cout << "Please Enter A Phone Number?" << endl;
+        cin >> info.phone;
+    }
+    void printInfo(strInfo info)
+    {
+        cout << "--------------------------------" << endl;
+        cout << "The First Name Is --> " << info.firstName << endl;
+        cout << "The Last Name Is --> " << info.lastName << endl;
+        cout << "The Age Is      --> " << info.age << endl;
+        cout << "The Phone Number Is --> " << info.phone << endl;
+        cout << "--------------------------------\n\n";
+    }
+
+    int main()
+    {
+        strInfo info;
+        readInfo(info);
+        printInfo(info);
+
+        strInfo info2;
+        readInfo(info2);
+        printInfo(info2);
+
+        strInfo info3;
+        readInfo(info3);
+        printInfo(info3);
+
+        return 0;
+    }
+----------------------------------------------------------------------------------------------------------------------
+--> Data Types in C++:
+   - Fundamental Data Types: int, float, char, bool, etc.
+   - Derived Data Types: arrays, pointers, etc.
+   - User-Defined Data Types: struct, class, etc.
+
+--> Array:
+   - An array is a *derived data type*.
+   - It stores *many values of the same type* in one place.
+   - Example: int numbers[5]; // an array with 5 integers.
+
+--> Accessing Elements:
+   - Each value in the array has a *position number* called "index".
+   - The first index is 0.
+   - Example: numbers[0] = 10; // put 10 in the first position.
+
+--> Array Length:
+   - You can find the number of elements in the array using sizeof.
+   - Example:
+     int length = sizeof(numbers) / sizeof(numbers[0]);
+
+--> Strings:
+   - string name = "John Doe";
+   - A string is *not* exactly an array.
+   - But you can think of it like an array of characters.
+-----------------------------------------------------------------------------------
+
+// Example: int x[5] = {22, 18, 2, 55, 520};
+
+-----------------------------------------------------
+| Array Indexes | Array Values  | Memory Addresses  |
+-----------------------------------------------------
+| x[0]          |  22           | 1000              |
+| x[1]          |  18           | 1004              |
+| x[2]          |   2           | 1008              |
+| x[3]          |  55           | 1012              |
+| x[4]          | 520           | 1016              |
+----------------------------------------------------
+
+Notes:
+- Index starts from 0.
+- Memory address changes by 4 bytes for each element (because int = 4 bytes).
+------------------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    string name = "Muhammad";
+    cout << name[0] << endl; //Prints --> M
+    cout << name[2] << endl; //Prints --> h
+    return 0;
+}
+------------------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int x[5] = { 11,22,33,40,100 };
+    cout << x[0] << endl; //prints --> 11
+    cout << x[2] << endl; //prints --> 33
+    cout << x[3] / 4 << endl; //prints 40/4 --> 10
+    return 0;
+}
+------------------------------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int x[5] = { 11,22,33,40,100 };
+    cout << x[0] + x[4] << endl; //prints 11+100 --> 111
+    cout <<x[0] + x[4]*2 << endl; //prints 11+100*2 --> 211
+    return 0;
+}
+---------------------------------------------------------------------------------------------------------------------
+--> (Arrays Of Structures):
+--> Ex1: Simple Example
+
+
+    struct strInfo
+    {
+        string firstName;
+        string lastName;
+    };
+
+    void readInfo(strInfo& info)
+    {
+        cout << "Please Enter Fist Name? " << endl;
+        cin >> info.firstName;
+        cout << "Please Enter Last Name?" << endl;
+        cin >> info.lastName;
+        cout << "*\n\n";
+    }
+
+    void printInfo(strInfo info)
+    {
+        cout << "Fist Name:  " << info.firstName << endl;
+        cout << "Last Name:  " << info.lastName << endl;
+        cout << "*\n\n";
+
+    }
+
+    void readPersonInfo(strInfo person[])
+    {
+        readInfo(person[0]);
+        readInfo(person[1]);
+    }
+
+    void printPersonInfo(strInfo person[])
+    {
+        printInfo(person[0]);
+        printInfo(person[1]);
+    }
+
+    int main()
+    {
+        strInfo person[2];
+        readPersonInfo(person);
+        printPersonInfo(person);
+
+        return 0;
+    }
+---------------------------------------------------------------------------------------------------------------------
+
+*/
+//HomWeWork
+/*
+struct strInfo
+{
+    string firstName;
+    string lastName;
+    int age;
+};
+
+void readData(strInfo& info) {
+    cout << "---------------\n";
+    cout << "The First Name?\n";
+    cin >> info.firstName;
+    cout << "The Last Name?\n";
+    cin >> info.lastName;
+    cout << "Age?\n";
+    cin >> info.age;
+    cout << "---------------\n\n";
+}
+void printData(strInfo info) {
+    cout << "The First Name: " << info.firstName << "\n";
+    cout << "The Last Name: " << info.lastName << "\n";
+    cout << "Age: " << info.age << "\n\n";
+   
+}
+void readPersonData(strInfo persons[100], int& size) {
+
+    cout << "Hello, How Much Persons You Want To Add?\nYou Can Add From 1-100 Only!\n";
+    cin >> size;
+    cout << "\nOk! You Already Added " << size << " from Persons.\n\n";
+
+    for (int i = 0; i < size; i++)
+    {
+        cout << "Please Enter Perons's Info " << i + 1 << ":\n";
+        readData(persons[i]);
+    }
+}
+
+void printPersonData(strInfo persons[100], int size) {
+
+    for (int i = 0; i < size; i++) {
+        cout << "The Informations For Person " << i + 1 << " Is:\n";
+        cout << "---------------\n";
+        printData(persons[i]);
+    }
+        cout << "---------------\n";
+
+}
+int main()
+{
+    strInfo persons[100];
+    int size;
+    readPersonData(persons, size);
+    printPersonData(persons, size);
+    return 0;
+}
+*/
+//Kafamdan Kisile ve bilgiler
+/* struct strAddress {
+//    string apartmanNo;
+//    string streetName;
+//    int HouseNo;
+//    string country;
+//    string city;
+//
+//};
+//struct strInfo {
+//    string firstName;
+//    string lastName;
+//    int age;
+//    strAddress address;
+//};
+//
+//void readInfo(strInfo &info) {
+//    cout << "First Name?\n";
+//    cin >> info.firstName;
+//    cout << "Last Name?\n";
+//    cin >> info.lastName;
+//    cout << "Age?\n";
+//    cin >> info.age;
+//    cout << "Country?\n";
+//    cin >> info.address.country;
+//    cout << "City?\n";
+//    cin >> info.address.city;
+//    cout << "\n";
+//}
+//
+//void printInfo(strInfo info) {
+//    cout << "*************************\n";
+//    cout << "First Name: " << info.firstName << "\n";
+//    cout << "Last Name: " << info.lastName << "\n";
+//    cout << "Age: " << info.age << "\n";
+//    cout << "Country: " << info.address.country << "\n";
+//    cout << "City: " << info.address.city << "\n";
+//    cout << "*************************\n\n";
+//
+//
+//}
+//
+//void readPersonInfo(strInfo kisiler[], int &kacKisi) {
+//    cout << "Kac Kisi Olacak?\n";
+//    cin >> kacKisi;
+//    cout << "\n";
+//    for (int  i = 0; i < kacKisi; i++)
+//    {
+//        cout << "Lutfen "<<i+1<<". Kisinin bilgileri gir:\n\n";
+//        readInfo(kisiler[i]);
+//    }
+//    cout << "\n\n";
+//}
+//
+//void printPersonInfo(strInfo kisiler[], int kacKisi) {
+//    
+//    for (int i = 0; i < kacKisi; i++)
+//    {
+//        cout << i + 1 << ". Kisinin bilgileri:\n";
+//        printInfo(kisiler[i]);
+//    }
+//}
+//
+//int main() {
+//    strInfo info;
+//    strInfo persons[100];
+//    int size;
+//
+//    readPersonInfo(persons, size);
+//    printPersonInfo(persons, size);
+//
+//    return 0;
+//}
+//
+*/
+//Kafamdan Ogrenciler ve Puanlar
+/*
+
+struct strGradesInfo {
+    string firstName;
+    string lastName;
+    float grade;
+};
+
+void readInfo(strGradesInfo &info) {
+
+    cout << "First Name?\n";
+    cin >> info.firstName;
+    cout << "Last Name?\n";
+    cin >> info.lastName;
+    cout << "Grade?\n";
+    cin >> info.grade;
+    cout << "\n";
+}
+
+
+void printInfo(strGradesInfo info) {
+    cout << "-------------------\n";
+    cout << "First Name: "<< info.firstName<<endl;
+    cout << "Last Name: " << info.lastName<<endl;
+    cout << "Grade: " << info.grade<<endl;
+    cout << "-------------------\n";
+}
+
+void readStudentInfo(strGradesInfo ogrenciler[], int& uzunluk)
+{
+    cout << "Merhaba, Kac Adet Ogrenci Olacak?" << endl;
+    cin >> uzunluk;
+    cout << "\n";
+    for (int i = 0; i < uzunluk; i++)
+    {
+        cout << i + 1 << ". Ogrencinin Bilgilerni Giriniz?\n\n";
+        readInfo(ogrenciler[i]);
+    }
+
+}
+
+void printStudentInfo(strGradesInfo ogrenciler[], int uzunluk)
+{
+
+    for (int i = 0; i < uzunluk; i++)
+    {
+        cout << i + 1 << ". Ogrencinin Bilgileri Soyle Olacak:\n";
+        printInfo(ogrenciler[i]);
+    }
+}
+
+int main() {
+
+    strGradesInfo info;
+    strGradesInfo students[100];
+    int howMuchStudent;
+    readStudentInfo(students, howMuchStudent);
+    printStudentInfo(students, howMuchStudent);
+    return 0;
+}
+
+
+*/
+
+int main() {
+
+
+    return 0;
+}
