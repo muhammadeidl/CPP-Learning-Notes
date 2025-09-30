@@ -1,0 +1,62 @@
+/*
+--> Nested For Loops are loops inside other loops.
+--> They are used to perform more complex tasks that require multiple levels of iteration.
+*/
+
+--> Ex:
+//program to print multiplication table
+
+/*
+#include <iostream>
+using namespace std;
+
+int main() {
+    
+    for (int i = 1; i <= 10; i++)
+    {
+        cout << "i= " << i <<" icin \n\n";
+        for (int j = 1; j <= 10; j++)
+        {
+           
+            cout <<i <<" * "<< j<<" = "<<i*j<<endl;
+           
+        }
+        cout << "--------------------------------\n\n";
+
+    }
+    return 0;
+}
+*/
+// -----------------------------------------------------------------------------------------------------
+
+
+/*
+#include <iostream>
+using namespace std;
+
+void readN(int &N, int &M) {
+    cout << "Hello, Please Enter The N:\n";
+    cin >> N;
+    cout << "Hello, Please Enter The M:\n";
+    cin >> M;
+    for (int i = 1; i <= N; i++)
+    {
+        cout << "i= " << i << " icin \n\n";
+        for (int j = 1; j <= M; j++)
+        {
+            cout << i << " * " << j << " = " << i * j << endl;
+        }
+        cout << "--------------------------------\n\n";
+
+    }
+
+}
+
+int main() {
+    int N, M;
+    readN(N, M);
+    return 0;
+}
+*/
+// -----------------------------------------------------------------------------------------------------
+
