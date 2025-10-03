@@ -98,25 +98,43 @@ int main() {
 
    Write a program to print:
    
-   *
-   **
-   ***
-   ****
-   *****
-   ******
-   *******
-   ********
-   *********
-   **********
+  *****
+  ****
+  ***
+  ** 
+  *
 
-	for (int  i = 1; i <= 10; i++)
-	{//i=1
-     //i=2
-	 //i=3
+	
+	for (int i = 5; i >=1; i--)
+	{
+		for (int j = 1; j <=i; j++)
+		{
+			cout << "*";
+		}
+		cout << "\n";
+	}
+
+    return 0;
+}
+-----------------------------------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+int main() {
+
+   Write a program to print:
+	   
+	*
+    **
+    ***
+    ****
+	*****
+
+
+	
+	for (int i = 1; i <= 10; i++)
+	{
 		for (int j = 1; j <= i; j++)
-		{//*
-		 //**
-		 //***
+		{
 			cout << "*";
 		}
 		cout << "\n";
@@ -132,25 +150,159 @@ int main() {
 
    Write a program to print:
 	   
-	*
-	**
-	***
-	****
-	*****
-	******
-	*******
-	********
-	*********
-	**********
+	AA
+	AB
+	AC
+	--
+	ZY
+	ZZ
 
-	for (int  i = 1; i <= 10; i++)
+	for (int i = 65; i <= 90; i++)
+{
+	cout << "For " << char(i) << " Will:\n";
+
+	for (int j = 65; j <=90 ; j++)
 	{
-		for (int j = i; j >= 1; j--)
+		cout<<char(i)<<char(j)<<"\n";
+	}
+	cout << "------------------\n";
+}
+
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+
+   Write a program to print:
+	   
+	A
+    AB
+    ABC
+    ****
+	*****----Z
+
+
+
+	for (int i = 65; i <= 90; i++)
+	{
+		for (int j = 65; j <=i ; j++)
 		{
-			cout << "*";
+			cout<<char(j);
 		}
 		cout << "\n";
 	}
-    return 0;
+
+
+
+	return 0;
+}
+-----------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+
+
+Write a program to print:
+
+ABC--YZ
+----
+ABC
+AB
+A
+
+
+int main() {
+
+	for (int i =90; i >= 65; i--)
+	{
+		for (int j = 65; j <=i ; j++)
+		{
+			cout<<char(j);
+		}
+		cout << "\n";
+	}
+
+
+
+	return 0;
+}
+-----------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+
+
+Write a program to print:
+
+
+12345678910
+123456789
+12345678
+1234567
+123456
+12345
+1234
+123
+12
+1
+
+int main() {
+
+	
+	for (int i = 10; i >=1; i--)
+	{
+		for (int k= 1 ; k <= i ; k++)
+		{
+			cout << k;
+		}
+		cout << "\n";
+	}
+
+
+
+	return 0;
+}
+-----------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+
+
+Write a program to print:
+
+1
+12
+123
+1234
+12345
+123456
+1234567
+12345678
+123456789
+12345678910
+
+int main() {
+
+	
+	
+	for (int i = 1; i <=10; i++)
+	{
+		for (int k= 1 ; k <= i ; k++)
+		{
+			cout << k;
+		}
+		cout << "\n";
+	}
+
+
+	return 0;
 }
 -----------------------------------------------------------------------------------------------------
